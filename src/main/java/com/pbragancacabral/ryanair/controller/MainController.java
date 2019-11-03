@@ -5,10 +5,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/person")
-public class Person {
+public class MainController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String test() {
-        return "person/index.html";
+    public String index() {
+        return "index";
     }
 }
