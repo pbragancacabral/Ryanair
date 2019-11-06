@@ -1,28 +1,35 @@
 package com.pbragancacabral.ryanair.entity;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Crew {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
             CascadeType.REFRESH})
     private Base base;
     private String crewcode;
-    private int rosterPattern;
+    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
+            CascadeType.REFRESH})
+    private Roster rosterPattern;
     private String email;
     private String password;
 
     public Crew() {
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -42,11 +49,11 @@ public class Crew {
         this.crewcode = crewcode;
     }
 
-    public int getRosterPattern() {
+    public Roster getRosterPattern() {
         return rosterPattern;
     }
 
-    public void setRosterPattern(int rosterPattern) {
+    public void setRosterPattern(Roster rosterPattern) {
         this.rosterPattern = rosterPattern;
     }
 
