@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -7,13 +7,12 @@
     <title>Ryanair</title>
 </head>
 <body>
-<form>
+<form action="/" method="post" th:object="${crew}">
     <div class="form-group">
         <label for="base">Base</label>
-        <select class="form-control" id="base">
-            <option selected disabled>Select</option>
-            <option>WRO</option>
-            <option>OPO</option>
+        <select class="form-control" id="base" th:field="*{base.id}">
+            <option selected disabled value="disabled">Select</option>
+            <option th:each="base : ${bases}" th:text="${base.getIATACode()}" th:value="${base.id}"></option>
         </select>
     </div>
     <div class="form-group">
