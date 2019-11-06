@@ -27,7 +27,8 @@ public class MainController {
 
     @PostMapping("/")
     @ResponseBody
-    public String index2() {
-        return "Hi";
+    public String index2(@RequestParam("crewcode") String crewcode, @RequestParam("baseId") Long baseId) {
+        Base base = baseRepository.getOne(baseId);
+        return crewcode + " is based in " + base.getIATACode();
     }
 }
