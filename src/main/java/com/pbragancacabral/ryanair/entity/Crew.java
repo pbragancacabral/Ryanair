@@ -6,20 +6,33 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Crew {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
             CascadeType.REFRESH})
+
+    @NotNull(message = "is required")
     private Base base;
+
+    @NotBlank(message = "is required")
     private String crewcode;
-    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
-            CascadeType.REFRESH})
-    private Roster rosterPattern;
+
+    @NotNull(message = "is required")
+    private Integer rosterPattern;
+
+    @Email(message = "is required")
+    @NotBlank(message = "is required")
     private String email;
+
+    @NotBlank(message = "is required")
     private String password;
 
     public Crew() {
@@ -49,11 +62,11 @@ public class Crew {
         this.crewcode = crewcode;
     }
 
-    public Roster getRosterPattern() {
+    public Integer getRosterPattern() {
         return rosterPattern;
     }
 
-    public void setRosterPattern(Roster rosterPattern) {
+    public void setRosterPattern(Integer rosterPattern) {
         this.rosterPattern = rosterPattern;
     }
 
@@ -71,5 +84,17 @@ public class Crew {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "Crew{" +
+                "id=" + id +
+                ", base=" + base +
+                ", crewcode='" + crewcode + '\'' +
+                ", rosterPattern=" + rosterPattern +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

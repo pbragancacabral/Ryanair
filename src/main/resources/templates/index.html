@@ -7,32 +7,37 @@
     <title>Ryanair</title>
 </head>
 <body>
-<form action="/" method="post" th:object="${crew}">
+<form action="/" method="post" th:object="${crew}" novalidate>
     <div class="form-group">
         <label for="base">Base</label>
-        <select class="form-control" id="base" name="baseId">
-            <option selected disabled value="disabled">Select</option>
+        <select class="form-control" id="base" name="baseId" th:field="*{base}">
+            <option selected value="">Select</option>
             <option th:each="base : ${bases}" th:text="${base.getIATACode()}" th:value="${base.id}"></option>
         </select>
+        <span class="error" th:if="${#fields.hasErrors('base')}" th:errors="*{base}"></span>
     </div>
     <div class="form-group">
         <label for="crewcode">Crewcode</label>
         <input type="text" class="form-control" id="crewcode" placeholder="Enter crewcode" th:field="*{crewcode}"/>
+        <span class="error" th:if="${#fields.hasErrors('crewcode')}" th:errors="*{crewcode}"></span>
     </div>
     <div class="form-group">
         <label for="rosterPattern">Roster pattern</label>
         <select class="form-control" id="rosterPattern" name="rosterPattern">
             <option selected disabled>Select</option>
-            <option th:each="roster : ${rosters}" th:text="${roster.pattern}" th:value="${roster.id}"></option>
+            <option th:each="roster : ${rosters}" th:text="${roster}" th:value="${roster}"></option>
         </select>
+        <span class="error" th:if="${#fields.hasErrors('rosterPattern')}" th:errors="*{rosterPattern}"></span>
     </div>
     <div class="form-group">
         <label for="email">Email</label>
         <input type="email" class="form-control" id="email" placeholder="Enter email" th:field="*{email}"/>
+        <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
     </div>
     <div class="form-group">
         <label for="password">Password</label>
         <input type="password" class="form-control" id="password" placeholder="Enter password" th:field="*{password}"/>
+        <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
     </div>
     <div class="form-group">
         <label for="security">Security question</label>
